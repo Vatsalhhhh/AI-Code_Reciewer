@@ -1,0 +1,160 @@
+:root {
+  --bg-dark: #0d1117;
+  --bg-panel: #161b22;
+  --accent-color: #58a6ff;
+  --accent-hover: #79c0ff;
+  --text-color: #c9d1d9;
+  --border-radius: 0.6rem;
+  --padding: 1rem;
+  --gap: 1rem;
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Code', monospace;
+  background-color: var(--bg-dark);
+  color: var(--text-color);
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+  padding: var(--padding);
+  height: 100vh;
+}
+
+.left-panel,
+.right-panel {
+  flex: 1 1 50%;
+  background-color: var(--bg-panel);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.3);
+  transition: all 0.4s ease-in-out;
+  position: relative;
+}
+
+.left-panel:hover,
+.right-panel:hover {
+  transform: scale(1.02) translateY(-3px);
+  box-shadow: 0 0 24px rgba(88, 166, 255, 0.5);
+}
+
+.panel-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 0.8rem;
+  text-align: center;
+  text-shadow: 0 0 4px rgba(88, 166, 255, 0.6);
+}
+
+.editor-wrapper,
+.review-output {
+  flex-grow: 1;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.review-button,
+.copy-button {
+  padding: 0.6rem 1.8rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--bg-dark);
+  cursor: pointer;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 12px rgba(88, 166, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.review-button:hover,
+.copy-button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 18px rgba(88, 166, 255, 0.6);
+}
+
+.review-button:disabled {
+  background-color: #444c56;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.review-output {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: #0d1117;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  box-shadow: inset 0 0 12px rgba(88, 166, 255, 0.1);
+  color: var(--text-color);
+  animation: glowPulse 3s infinite alternate;
+}
+
+.review-output code {
+  background-color: #161b22;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: var(--accent-color);
+  font-size: 0.95rem;
+}
+
+.left-panel .code {
+  flex-grow: 1;
+  background-color: #161b22;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow: auto;
+  box-shadow: inset 0 0 12px rgba(88, 166, 255, 0.1);
+  font-size: 16px;
+  color: var(--text-color);
+  animation: glowPulse 4s infinite alternate;
+}
+
+.left-panel .code::-webkit-scrollbar,
+.right-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.left-panel .code::-webkit-scrollbar-thumb,
+.right-panel::-webkit-scrollbar-thumb {
+  background-color: #444c56;
+  border-radius: 4px;
+}
+
+.left-panel .code::-webkit-scrollbar-track,
+.right-panel::-webkit-scrollbar-track {
+  background-color: #0d1117;
+  border-radius: 4px;
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: inset 0 0 6px rgba(88, 166, 255, 0.1), 0 0 6px rgba(88, 166, 255, 0.2); }
+  50% { box-shadow: inset 0 0 10px rgba(88, 166, 255, 0.15), 0 0 12px rgba(88, 166, 255, 0.3); }
+  100% { box-shadow: inset 0 0 6px rgba(88, 166, 255, 0.1), 0 0 6px rgba(88, 166, 255, 0.2); }
+}
+
+@media (max-width: 1200px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .left-panel,
+  .right-panel {
+    flex: 1 1 100%;
+    min-height: 300px;
+  }
+  .review-button {
+    align-self: stretch;
+    text-align: center;
+  }
+}
